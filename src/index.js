@@ -13,6 +13,8 @@ const app = express();
 app.use(express.json());;
 app.use(cors());
 
+require("./routes/index")(app);
+
 app.listen(8000, () => {
     console.log("Server run port 8000.")
 })
