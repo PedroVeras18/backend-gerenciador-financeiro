@@ -1,60 +1,58 @@
-const { prisma } = require("../services/prisma")
+const { prisma } = require("../services/prisma");
 
 exports.createUser = async (data) => {
-    const user = await prisma.user.create({
-        data,
-        select: {
-            id: true,
-            name: true,
-            email: true,
-            password: false
-        }
-    });
-    return user;
+  const user = await prisma.user.create({
+    data,
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      password: false,
+    },
+  });
+  return user;
 };
 
 exports.getUsers = async () => {
-    const users = await prisma.user.findMany({
-        select: {
-            id: true,
-            name: true,
-            email: true,
-            password: false
-        }
-    });
-    return users;
+  const users = await prisma.user.findMany({
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      password: false,
+    },
+  });
+  return users;
 };
 
 exports.getById = async (id) => {
-    const user = await prisma.user.findUnique({
-        where: {
-            id
-        },
-    });
-    return user;
+  const user = await prisma.user.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      password: false,
+    },
+  });
+  return user;
 };
 
 exports.updateUser = async (id, data) => {
-    const user = await prisma.user.update({
-        where: {
-            id
-        },
-        select: {
-            id: true,
-            name: true,
-            email: true,
-            password: false
-        },
-        data,
-    });
-    return user;
+  const user = await prisma.user.update({
+    where: { id },
+    data,
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      password: false,
+    },
+  });
+  return user;
 };
 
 exports.removeUser = async (id) => {
-    await prisma.user.delete({
-        where: {
-            id,
-        },
-    });
-    return
+  await prisma.user.delete({ where: { id } });
+  return;
 };
