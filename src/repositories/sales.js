@@ -7,7 +7,7 @@ exports.createSale = async (data) => {
     return sale;
 };
 
-exports.getSale = async () => {
+exports.getSales = async () => {
     const sales = await prisma.sales.findMany({})
     return sales;
 };
